@@ -1,0 +1,15 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  finalizers:
+    - finalizers.fluxcd.io
+  name: helm-charts
+  namespace: vela-system
+spec:
+  interval: 10m
+  provider: generic
+  secretRef:
+    name: helm-chart-creds
+  timeout: 60s
+  type: oci
+  url: oci://docker.io/sujaykumarsuman

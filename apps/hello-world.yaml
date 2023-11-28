@@ -1,0 +1,38 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: vela-system
+  labels:
+    fluxcd.io/system: kubevela
+spec:
+  components:
+    - name: hello-world
+      type: helm
+      properties:
+        bootstrap: true
+        chart: hello-world
+        createNamespace: true
+        disableHooks: false
+        install:
+          remediation:
+            retries: -1
+        installTimeout: 10m
+        interval: 5m
+        pullInterval: 5m
+        releaseName: hello-world
+        repoType: helm
+        retries: -1
+        sourceRef:
+          kind: HelmRepository
+          name: helm-charts
+          namespace: vela-system
+        targetNamespace: apps
+        timeout: 20m
+        upgrade:
+          remediation:
+            retries: -1
+        valuesFrom:
+          - kind: ConfigMap
+            name: hello-world-values
+        version: 1.0.0

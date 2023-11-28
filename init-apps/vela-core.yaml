@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: vela-core
+  namespace: vela-system
+  labels:
+    fluxcd.io/system: bootstrap
+spec:
+  chart:
+    spec:
+      chart: vela-core
+      interval: 5m
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: helm-charts
+        namespace: vela-system
+      version: 1.9.6
+  install:
+    createNamespace: false
+    disableHooks: false
+    remediation:
+      retries: -1
+  interval: 5m
+  releaseName: vela-core
+  targetNamespace: vela-system
+  timeout: 15m
+  upgrade:
+    disableHooks: false
+    remediation:
+      retries: -1
+  valuesFrom:
+    - kind: ConfigMap
+      name: vela-core-values

@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flux2-values
+  namespace: vela-system
+data:
+  values.yaml: |
+    helmController:
+      container:
+        additionalArgs:
+          - --concurrent=30
+          - --watch-label-selector=fluxcd.io/system=kubevela
+      resources:
+        limits:
+          memory: 8Gi
+        requests:
+          cpu: '.5'
+          memory: 2Gi
+    imageAutomationController:
+      resources:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 128Mi
+    imageReflectionController:
+      resources:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 128Mi
+    installCRDs: false
+    kustomizeController:
+      container:
+        additionalArgs:
+          - --watch-label-selector=fluxcd.io/system=kubevela
+      resources:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 128Mi
+    notificationController:
+      resources:
+        limits: {}
+        requests:
+          cpu: 100m
+          memory: 64Mi
+    rbac:
+      create: false
+      createAggregation: false
+    sourceController:
+      container:
+        additionalArgs:
+          - --concurrent=20
+      resources:
+        limits:
+          cpu: 2000m
+          memory: 2Gi
+        requests:
+          cpu: '1'
+          memory: 1Gi

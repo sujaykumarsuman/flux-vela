@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vela-core-values
+  namespace: vela-system
+data:
+  values.yaml: |
+    env: kind-flux
