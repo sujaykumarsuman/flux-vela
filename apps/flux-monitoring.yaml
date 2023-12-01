@@ -1,0 +1,38 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: flux-monitoring
+  namespace: vela-system
+  labels:
+    fluxcd.io/system: kubevela
+spec:
+  components:
+    - name: flux-monitoring
+      type: helm
+      properties:
+        bootstrap: true
+        chart: flux-monitoring
+        createNamespace: true
+        disableHooks: false
+        install:
+          remediation:
+            retries: -1
+        installTimeout: 10m
+        interval: 5m
+        pullInterval: 5m
+        releaseName: flux-monitoring
+        repoType: helm
+        retries: -1
+        sourceRef:
+          kind: HelmRepository
+          name: helm-charts
+          namespace: vela-system
+        targetNamespace: monitoring
+        timeout: 20m
+        upgrade:
+          remediation:
+            retries: -1
+        valuesFrom:
+          - kind: ConfigMap
+            name: flux-monitoring-values
+        version: 1.0.2
