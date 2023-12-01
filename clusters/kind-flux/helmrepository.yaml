@@ -6,7 +6,7 @@ metadata:
   name: helm-charts
   namespace: vela-system
 spec:
-  interval: 10m
+  interval: 1m
   provider: generic
   secretRef:
     name: helm-chart-creds
