@@ -29,7 +29,6 @@ data:
       alertmanager:
         enabled: false
       prometheus:
-        enabled: false
         prometheusSpec:
           retention: 24h
           resources:
