@@ -11,6 +11,12 @@ To begin with,
 2. run `make kind-create`
 3. run `make flux-bootstrap`
 
-This will setup a local kind cluster `kind-flux-vela` with all the required components to start deploying kubevela applications.
+This will set up a local kind cluster `kind-flux-vela` with all the required components to start deploying kubevela applications.
 
+```text
+NOTE:
+Make sure these are present on cluster after flux-bootstrap is completed:
+-  helm-chart-creds (for pulling helm charts from helm repositroy)
+-  slack-bot-token (for sending slack alerts)
+```
 #TODO: add more details on how this works
